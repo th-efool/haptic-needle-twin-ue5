@@ -1,10 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Character/PizeoSensorInput.h"
+
+#include "PiezoSensorReceiver.h"
+
 
 // Sets default values
-APizeoSensorInput::APizeoSensorInput()
+APiezoSensorReceiver::APiezoSensorReceiver()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -12,16 +13,17 @@ APizeoSensorInput::APizeoSensorInput()
 }
 
 // Called when the game starts or when spawned
-void APizeoSensorInput::BeginPlay()
+void APiezoSensorReceiver::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void APizeoSensorInput::Tick(float DeltaTime)
+void APiezoSensorReceiver::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
+
 

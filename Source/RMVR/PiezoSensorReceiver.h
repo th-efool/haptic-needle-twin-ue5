@@ -1,19 +1,22 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+
+
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "PizeoSensorInput.generated.h"
+#include "GameFramework/Character.h"
+#include "PiezoSensorReceiver.generated.h"
+
+
 
 UCLASS()
-class RMVR_API APizeoSensorInput : public AActor
+class RMVR_API APiezoSensorReceiver : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APizeoSensorInput();
+	APiezoSensorReceiver();
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,4 +26,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	
+	
 };
