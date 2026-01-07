@@ -29,6 +29,28 @@ This enforces *procedural correctness* rather than simple animation playback, tu
 
 ---
 
+### Capability
+
+| Capability | Description |
+|-----------|-------------|
+| **Logic-Gated Insertion** | Cannula insertion is allowed only when sensor activation patterns satisfy predefined correctness constraints. |
+| **Real-Time Digital Twin** | Physical touch events from Arduino are mirrored instantly inside Unreal Engine 5. |
+| **Haptic-Driven Validation** | Touch correctness governs *possibility*, not animation state or scripted flow. |
+| **Research-First Architecture** | Designed to study soft electronics, tactile semantics, and human–machine coupling. |
+
+---
+
+### Research Direction
+
+| Focus Area | Exploration |
+|-----------|-------------|
+| **Soft-Body Electronics** | Flexible / deformable sensing materials for intent detection. |
+| **Constraint-Based Simulation** | Enforcing physical correctness via logic gates. |
+| **Medical Training Systems** | Procedural correctness over visual realism. |
+| **Human–Machine Interaction** | Translating touch semantics into digital control. |
+
+---
+
 ## System Architecture
 
 ```
