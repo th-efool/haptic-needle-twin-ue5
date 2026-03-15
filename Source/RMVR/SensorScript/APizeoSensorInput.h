@@ -3,9 +3,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Character/RMVRCharacterBase.h"
+#include "RMVR/Character/RMVRCharacterBase.h"
 
-#include "PizeoSensorInput.generated.h"
+#include "APizeoSensorInput.generated.h"
 
 UCLASS()
 class RMVR_API APizeoSensorInput : public AActor
