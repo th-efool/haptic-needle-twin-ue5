@@ -88,7 +88,15 @@ void APizeoSensorInput::StartSerial()
     {
         SerialWorker();
     });
-
+    if (GEngine)
+    {
+        GEngine->AddOnScreenDebugMessage(
+            -1,
+            3.0f,
+            FColor::Green,
+            FString::Printf(TEXT("Pizeo serial connected to %s"), *PortName)
+        );
+    }
     UE_LOG(LogTemp, Warning, TEXT("Pizeo serial connected to %s"), *PortName);
 
 #endif
@@ -114,30 +122,57 @@ void APizeoSensorInput::SerialWorker()
         if (BytesRead == 0)
             continue;
 
-        FString Incoming = FString(ANSI_TO_TCHAR(std::string(TempBuffer, BytesRead).c_str()));
+        
+        FString RawDebug = FString(ANSI_TO_TCHAR(std::string(TempBuffer, BytesRead).c_str()));
+        UE_LOG(LogTemp, Warning, TEXT("RAW SERIAL: %s"), *RawDebug);
+        if (GEngine)
+        {
+            GEngine->AddOnScreenDebugMessage(
+                -1,
+                3.0f,
+                FColor::Green,
+                FString::Printf(TEXT("Pizeo hit: %s"), *RawDebug)
+            );
+        }
+        
+        // convert incoming bytes safely
+        FString Incoming = FString(UTF8_TO_TCHAR(std::string(TempBuffer, BytesRead).c_str()));
+
+        UE_LOG(LogTemp, Warning, TEXT("RAW SERIAL: %s"), *Incoming);
 
         Buffer += Incoming;
 
-        int32 NewlineIndex;
-
-        while (Buffer.FindChar('\n', NewlineIndex))
+        // parse any digits present
+        for (int32 i = 0; i < Buffer.Len(); i++)
         {
-            FString Line = Buffer.Left(NewlineIndex).TrimStartAndEnd();
+            TCHAR c = Buffer[i];
 
-            Buffer = Buffer.Mid(NewlineIndex + 1);
-
-            if (!Line.IsNumeric())
-                continue;
-
-            int32 SensorIndex = FCString::Atoi(*Line);
-
-            AsyncTask(ENamedThreads::GameThread, [this, SensorIndex]()
+            if (FChar::IsDigit(c))
             {
-                UE_LOG(LogTemp, Warning, TEXT("Pizeo hit: %d"), SensorIndex);
+                int32 SensorIndex = c - '0';
 
-                OnPiezoHit.Broadcast(SensorIndex);
-            });
+                AsyncTask(ENamedThreads::GameThread, [this, SensorIndex]()
+                {
+                    UE_LOG(LogTemp, Warning, TEXT("PARSED Pizeo hit: %d"), SensorIndex);
+
+                    if (GEngine)
+                    {
+                        GEngine->AddOnScreenDebugMessage(
+                            -1,
+                            2.0f,
+                            FColor::Green,
+                            FString::Printf(TEXT("PARSED Pizeo hit: %d"), SensorIndex)
+                        );
+                    }
+
+                    OnPizeoHitBP(SensorIndex);
+                    OnPiezoHit.Broadcast(SensorIndex);
+                });
+            }
         }
+
+        // clear buffer since we consumed everything
+        Buffer.Empty();
 
         FPlatformProcess::Sleep(0.001f);
     }

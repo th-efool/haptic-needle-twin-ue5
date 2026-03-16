@@ -23,6 +23,8 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 public:
+	UFUNCTION(BlueprintImplementableEvent, Category="Pizeo")
+	void OnPizeoHitBP(int32 SensorIndex);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Serial")
 	FString PortName = "COM7";
