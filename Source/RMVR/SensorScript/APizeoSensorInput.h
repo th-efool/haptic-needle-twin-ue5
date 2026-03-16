@@ -6,30 +6,46 @@
 #include "RMVR/Character/RMVRCharacterBase.h"
 
 #include "APizeoSensorInput.generated.h"
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPizeoHit, int32, SensorIndex);
 
 UCLASS()
 class RMVR_API APizeoSensorInput : public AActor
 {
 	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
+
+public:
+
 	APizeoSensorInput();
 
-	// Select BP_ThirdPersonCharacter in editor
-	UPROPERTY(EditAnywhere, Category = "Target")
-	TSubclassOf<ARMVRCharacterBase> TargetCharacterClass;
-
-	UPROPERTY(EditAnywhere, Category = "Hand Highlight")
-	int32 PointIndex = 0;
-
-
 protected:
-	// Called when the game starts or when spawned
+
 	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+public:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Serial")
+	FString PortName = "COM7";
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Serial")
+	int32 BaudRate = 115200;
+
+	UPROPERTY(BlueprintAssignable, Category="Pizeo")
+	FOnPizeoHit OnPiezoHit;
+
+private:
+
+	void StartSerial();
+	void StopSerial();
+	void SerialWorker();
+
+private:
+
+	void* SerialHandle;
+
+	FString Buffer;
+
+	bool bRunning;
+
+	TFuture<void> WorkerThread;
 };
