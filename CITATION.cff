@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this software or digital twin framework in your research, please cite it as below."
+type: software
+title: "Haptic Needle Twin (UE5): A Logic-Gated Digital Twin Framework for Tactile-Sensing Medical Needle Insertion Simulation"
+abstract: >-
+  A real-time Unreal Engine 5 digital twin framework for simulating cannula
+  and needle insertion procedures using haptic-augmented physical inputs and
+  soft-body electronics. The architecture interfaces an Arduino-driven tactile
+  sensor array with UE5 via low-latency serial streaming, enforcing procedural
+  correctness through logic-gated insertion constraints where tactile semantics
+  and sensor alignment govern physical simulation possibility rather than
+  pre-scripted animations.
+authors:
+  - family-names: "Singh"
+    given-names: "Agrim"
+repository-code: "https://github.com/th-efool/haptic-needle-twin-ue5"
+url: "https://github.com/th-efool/haptic-needle-twin-ue5"
+license: MIT
+version: 1.0.0
+date-released: "2026-03-17"
+keywords:
+  - "digital twin"
+  - "haptics"
+  - "medical simulation"
+  - "tactile sensing"
+  - "soft electronics"
+  - "unreal engine 5"
+  - "openxr"
+  - "cannula insertion"
+  - "sensor validation"
+  - "human-machine interaction"
+preferred-citation:
+  type: software
+  title: "Haptic Needle Twin (UE5): A Logic-Gated Digital Twin Framework for Tactile-Sensing Medical Needle Insertion Simulation"
+  authors:
+    - family-names: "Singh"
+      given-names: "Agrim"
+  year: 2026
+  month: 3
+  url: "https://github.com/th-efool/haptic-needle-twin-ue5"
+  license: MIT
