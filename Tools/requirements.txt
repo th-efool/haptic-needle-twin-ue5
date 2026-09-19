@@ -1,0 +1,2 @@
+# Haptic Needle Twin UE5 - Python Tooling Requirements
+pyserial>=3.5
